@@ -2,27 +2,27 @@
 
 ## Overview
 
-Successfully refactored the Bash MOTD script (`motd.sh`) into a high-performance Go implementation.
+A Go implementation of MOTD (Message of the Day) for displaying system and media service information.
 
 ## Directory Structure
 
 ```
 go-motd/
-├── main.go           # Go implementation (~520 lines)
+├── main.go           # Go implementation (~700 lines)
 ├── go.mod            # Go module definition
-├── motd              # Regular compiled binary (8.1 MB)
-├── motd-optimized    # Optimized binary (5.6 MB)
+├── bin/              # Build output directory
+│   └── motd          # Compiled binary
 ├── Makefile          # Build automation
-├── benchmark.sh      # Performance comparison script
+├── .gitignore        # Git ignore rules
 └── README.md         # Documentation
 ```
 
 ## Key Improvements
 
 ### Performance
-- **Startup Time**: 10-50ms (Go) vs 200-500ms (Bash) - ~5-10x faster
-- **Memory Usage**: 5-10MB (Go) vs 15-30MB (Bash)
-- **Binary Size**: 5.6MB (optimized) vs 10KB (Bash script)
+- **Startup Time**: ~10-50ms typical
+- **Memory Usage**: ~5-10MB
+- **Binary Size**: ~6MB (optimized with stripped symbols)
 - **HTTP Efficiency**: Built-in connection pooling and concurrent capabilities
 
 ### Code Quality
@@ -31,8 +31,8 @@ go-motd/
 - **Maintainability**: Clear function organization
 - **No External Dependencies**: All functionality built-in except optional tools (figlet, lolcat, sensors, vnstat, docker)
 
-### Features Preserved
-- ✅ All command-line flags (-h, -v, -V, -d)
+### Features
+- ✅ Command-line flags (-h, -v, -d)
 - ✅ Environment variable configuration
 - ✅ .env file loading
 - ✅ All system information displays (OS, uptime, load, memory, bandwidth)
@@ -62,19 +62,19 @@ go-motd/
 
 ## Build Commands
 
+All builds output to the `bin/` directory:
+
 ```bash
-# Regular build
-go build -o motd main.go
-
-# Optimized build (recommended)
-go build -ldflags="-s -w" -o motd main.go
-
 # Using Makefile
-make                    # Build optimized binary
+make                    # Build optimized binary (default)
 make build             # Build regular binary
+make build-optimized   # Build optimized binary
 make install           # Install to /usr/local/bin
 make cross-compile     # Build for multiple platforms
-make benchmark         # Compare performance with Bash version
+make clean             # Remove bin/ directory
+
+# Or directly with Go
+mkdir -p bin && go build -ldflags="-s -w" -o bin/motd main.go
 ```
 
 ## Cross-Platform Support
@@ -83,31 +83,28 @@ The Go implementation can be compiled for various platforms:
 
 ```bash
 # Linux AMD64
-GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o motd-linux-amd64 main.go
+GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/motd-linux-amd64 main.go
 
 # Linux ARM64 (Raspberry Pi, etc.)
-GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o motd-linux-arm64 main.go
+GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o bin/motd-linux-arm64 main.go
 
 # macOS Intel
-GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o motd-darwin-amd64 main.go
+GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o bin/motd-darwin-amd64 main.go
 
 # macOS Apple Silicon
-GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o motd-darwin-arm64 main.go
+GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o bin/motd-darwin-arm64 main.go
 
 # Windows
-GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o motd.exe main.go
+GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o bin/motd.exe main.go
 ```
 
 ## Usage
 
-Identical to the Bash version:
-
 ```bash
-./motd              # Display MOTD
-./motd -h           # Show help
-./motd -v           # Show version
-./motd -V           # Verbose mode
-./motd -d           # Debug mode
+./bin/motd          # Display MOTD
+./bin/motd -h       # Show help
+./bin/motd -v       # Show version
+./bin/motd -d       # Debug mode
 ```
 
 ## Environment Variables
@@ -125,9 +122,9 @@ Same as original:
 ### Go Build Dependencies
 - Go 1.20+ (installed via Homebrew)
 
-### Runtime Dependencies (same as Bash version)
-- Required: `curl`, `awk`, `grep`, `free`, `df`, `uptime`, `ps`
-- Optional: `jq`, `xmlstarlet`, `sensors`, `vnstat`, `figlet`, `lolcat`, `numfmt`, `docker`
+### Runtime Dependencies (Optional)
+- System tools: `free`, `df`, `uptime`, `ps`, `who`
+- Optional: `sensors`, `vnstat`, `figlet`, `lolcat`, `docker`
 
 ## Future Enhancements
 
@@ -143,14 +140,14 @@ Potential improvements that Go enables:
 
 ## Testing
 
-Run the benchmark to compare performance:
+Test the binary after building:
 
 ```bash
-cd go-motd
-./benchmark.sh
+make test
+# Or directly:
+./bin/motd -h
+./bin/motd -v
 ```
-
-This will run both versions 10 times and show the speed improvement.
 
 ## Installation
 
@@ -165,6 +162,6 @@ sudo make install
 echo "motd" >> ~/.bashrc   # or ~/.zshrc
 ```
 
-## Conclusion
+## Summary
 
-The Go refactoring provides significant performance improvements while maintaining 100% feature parity with the original Bash script. The compiled binary starts faster, uses less memory, and provides better error handling, making it ideal for production use.
+The Go implementation provides fast startup time (~10-50ms), low memory usage (~5-10MB), and robust error handling with graceful degradation when optional dependencies are missing.

@@ -1,26 +1,36 @@
 # MOTD - Go Implementation
 
-This is a high-performance Go refactor of the original Bash MOTD (Message of the Day) script.
+A Go implementation of MOTD (Message of the Day) that displays system information, service status, and media service statistics.
 
 ## Features
 
-- **Fast Execution**: Compiled binary runs significantly faster than the Bash script
+- **Fast Execution**: Compiled binary with quick startup time
 - **Concurrent HTTP Requests**: Uses Go's native HTTP client with connection pooling
-- **Low Memory Footprint**: Efficient memory management compared to shell script
+- **Low Memory Footprint**: Efficient memory management
 - **Cross-Platform**: Can be compiled for different architectures
 
 ## Build
 
+All build outputs are placed in the `bin/` directory:
+
 ```bash
-go build -o motd main.go
+# Build regular binary
+make build
+# Output: bin/motd
+
+# Build optimized binary (recommended)
+make build-optimized
+# Output: bin/motd
 ```
 
-## Build with Optimizations
-
-For even better performance, build with optimizations:
+Or using Go directly:
 
 ```bash
-go build -ldflags="-s -w" -o motd main.go
+# Regular build
+mkdir -p bin && go build -o bin/motd main.go
+
+# Optimized build (smaller binary)
+mkdir -p bin && go build -ldflags="-s -w" -o bin/motd main.go
 ```
 
 The `-s -w` flags strip debug information and symbol tables, reducing binary size.
@@ -39,8 +49,6 @@ Options:
 
 ## Environment Variables
 
-Same as the original Bash script:
-
 - `ENV_FILE` - Path to environment file (default: `/opt/apps/compose/.env`)
 - `PLEX_URL`, `PLEX_TOKEN` - Plex server configuration
 - `JELLYFIN_URL`, `JELLYFIN_TOKEN` - Jellyfin server configuration
@@ -50,22 +58,15 @@ Same as the original Bash script:
 - `TANK_MOUNT` - Tank mount point (default: `/mnt/tank`)
 - `COMPOSEDIR` - Compose directory (default: `/opt/apps/compose`)
 
-## Performance
+## Technical Details
 
-The Go implementation provides significant performance improvements:
-
-- **Startup time**: ~10-50ms vs 200-500ms for Bash
-- **Memory usage**: ~5-10MB vs 15-30MB for Bash
-- **HTTP requests**: Concurrent execution vs sequential in Bash
-- **Binary size**: ~8MB (can be reduced with stripping)
-
-## Differences from Bash Version
-
-1. **HTTP Client**: Uses Go's built-in HTTP client with connection pooling and timeout handling
-2. **Concurrency**: Can easily be extended to make API calls concurrently
-3. **Error Handling**: More robust error handling throughout
-4. **Type Safety**: Strongly typed data structures for API responses
-5. **No External Dependencies**: All functionality built-in (except `figlet`, `lolcat`, `sensors`, `vnstat`, `docker` if you want those features)
+- **Startup time**: ~10-50ms typical
+- **Memory usage**: ~5-10MB
+- **HTTP Client**: Built-in HTTP client with connection pooling and timeout handling
+- **Concurrency**: Can easily be extended to make API calls concurrently
+- **Error Handling**: Robust error handling with graceful degradation
+- **Type Safety**: Strongly typed data structures for API responses
+- **Optional Dependencies**: `figlet`, `lolcat`, `sensors`, `vnstat`, `docker` (features work without them)
 
 ## Installation
 
@@ -75,28 +76,39 @@ The Go implementation provides significant performance improvements:
 4. Run `motd` on login by adding to your shell profile
 
 ```bash
-sudo cp motd /usr/local/bin/
-chmod +x /usr/local/bin/motd
+# Using Makefile
+make install
+
+# Or manually
+sudo cp bin/motd /usr/local/bin/
+sudo chmod +x /usr/local/bin/motd
 ```
 
 ## Cross-Compilation
 
-Build for different platforms:
+Build for different platforms (outputs to `bin/` directory):
 
 ```bash
+# Build all platforms
+make cross-compile
+
+# Or manually for specific platforms:
+mkdir -p bin
+
 # Linux AMD64
-GOOS=linux GOARCH=amd64 go build -o motd-linux-amd64 main.go
+GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/motd-linux-amd64 main.go
 
 # Linux ARM64
-GOOS=linux GOARCH=arm64 go build -o motd-linux-arm64 main.go
+GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o bin/motd-linux-arm64 main.go
 
 # macOS AMD64
-GOOS=darwin GOARCH=amd64 go build -o motd-darwin-amd64 main.go
+GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o bin/motd-darwin-amd64 main.go
 
 # macOS ARM64 (Apple Silicon)
-GOOS=darwin GOARCH=arm64 go build -o motd-darwin-arm64 main.go
+GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o bin/motd-darwin-arm64 main.go
+
+# Windows AMD64
+GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o bin/motd-windows-amd64.exe main.go
 ```
 
-## License
 
-Same as the original MOTD script.
