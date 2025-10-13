@@ -50,16 +50,14 @@ type Config struct {
 
 // Global state
 var (
-	config      Config
-	httpClient  *http.Client
-	debugMode   bool
-	verboseMode bool
+	config     Config
+	httpClient *http.Client
+	debugMode  bool
 )
 
 func main() {
 	showHelp := flag.Bool("h", false, "Show help message")
 	showVersion := flag.Bool("v", false, "Show version information")
-	verbose := flag.Bool("V", false, "Show optional dependency warnings")
 	debug := flag.Bool("d", false, "Enable debug mode")
 	flag.Parse()
 
@@ -73,7 +71,6 @@ func main() {
 		return
 	}
 
-	verboseMode = *verbose
 	debugMode = *debug
 
 	// Initialize HTTP client
@@ -127,7 +124,6 @@ Display Message of the Day (MOTD) with system and media service statistics.
 Options:
   -h    Show this help message
   -v    Show version information
-  -V    Show optional dependency warnings
   -d    Enable debug mode
 
 Environment Variables:
@@ -728,27 +724,4 @@ func hasFiglet() bool {
 
 func hasLolcat() bool {
 	return hasCommand("lolcat")
-}
-
-func apiCurl(url string, headers map[string]string) ([]byte, error) {
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	for key, value := range headers {
-		req.Header.Set(key, value)
-	}
-
-	resp, err := httpClient.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("HTTP %d", resp.StatusCode)
-	}
-
-	return io.ReadAll(resp.Body)
 }
