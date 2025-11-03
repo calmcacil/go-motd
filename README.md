@@ -94,8 +94,6 @@ system:
   tank_mount: "/mnt/tank"
 ```
 
-
-
 ## Technical Details
 
 - **Startup time**: ~10-50ms typical
@@ -113,11 +111,13 @@ system:
 📖 **For detailed installation instructions, see [INSTALL.md](INSTALL.md)**
 
 #### Option 1: Download Pre-built Binary (Recommended)
+
 1. Go to the [Releases page](https://github.com/calmcacil/go-motd/releases)
 2. Download the appropriate binary for your system
 3. Extract and install to `/usr/local/bin/`
 
 #### Option 2: Build from Source
+
 ```bash
 git clone https://github.com/calmcacil/go-motd.git
 cd go-motd
@@ -125,6 +125,7 @@ make install
 ```
 
 ### Manual Installation
+
 1. Build the binary
 2. Copy to `/usr/local/bin/` or another location in your PATH
 3. Set up environment variables or YAML configuration
@@ -149,6 +150,7 @@ This project uses **semantic-release** for automatic versioning and releases:
 - **GitHub releases** created with all assets
 
 ### Commit Convention
+
 Follow [Conventional Commits](https://www.conventionalcommits.org/) for automatic releases:
 - `feat:` - New features (minor version)
 - `fix:` - Bug fixes (patch version)
@@ -188,5 +190,3 @@ GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o bin/motd-darwin-arm64 main
 # Windows AMD64
 GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o bin/motd-windows-amd64.exe main.go
 ```
-
-

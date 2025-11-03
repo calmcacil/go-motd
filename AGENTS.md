@@ -1,6 +1,7 @@
 # AGENTS.md
 
 ## Build Commands
+
 - `make build` - Build regular binary to bin/motd
 - `make build-optimized` - Build optimized binary with -ldflags="-s -w"
 - `make test` - Build and run basic test (shows help)
@@ -12,6 +13,7 @@
 - `golangci-lint run` - Run comprehensive linting
 
 ## Code Style Guidelines
+
 - Use standard Go formatting (`gofmt`)
 - Import organization: stdlib, third-party, local (alphabetical within groups)
 - Error handling: always check errors, use early returns

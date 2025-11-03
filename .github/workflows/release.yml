@@ -103,7 +103,7 @@ jobs:
           sed -i "s/VERSION = \".*\"/VERSION = \"$NEXT_VERSION\"/" main.go
           
           # Commit version change
-          git add main.go
+          git add main.go package-lock.json
           git commit -m "chore: bump version to $NEXT_VERSION [skip ci]"
           git push
 
@@ -177,6 +177,5 @@ jobs:
             release/checksums.txt
           draft: false
           prerelease: false
-          overwrite: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

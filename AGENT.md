@@ -13,26 +13,30 @@ This document provides guidelines for AI agents and developers when adding new f
 ## Core Principles
 
 ### 1. Maintain Performance
+
 - **Fast Startup**: Every millisecond matters. Avoid slow initialization.
 - **Concurrent Operations**: Use goroutines for I/O-bound operations (API calls, file reads)
 - **Connection Pooling**: Reuse HTTP connections via the global `httpClient`
 - **Fail Fast**: Don't wait for timeouts; use aggressive timeout values
 
 ### 2. Graceful Degradation
+
 - **Optional Features**: Missing tools/services should not cause errors
 - **Silent Failures**: If a service is unavailable, skip it silently (unless debug mode)
 - **Command Checks**: Always verify commands exist with `hasCommand()` before using
 - **API Failures**: Handle HTTP errors gracefully; show nothing rather than error messages
 
 ### 3. Code Organization
+
 - **Function Naming**: Use `show*()` for display functions (e.g., `showPlex()`, `showDocker()`)
 - **Helper Functions**: Keep utilities at the bottom of the file
 - **Consistent Patterns**: Follow existing patterns for new features
 - **Type Safety**: Use structs for API responses; avoid `interface{}` when possible
 
 ### 4. User Experience
+
 - **Consistent Formatting**: Use `dotLabel()` for all metric labels
-- **Color Coding**: 
+- **Color Coding**:
   - `GREEN`: Good/no issues
   - `YELLOW`: Warning/moderate activity
   - `RED`: Critical/high activity
@@ -126,6 +130,7 @@ func showNewService() {
 ```
 
 **Configuration steps**:
+
 1. Add fields to `Config` struct
 2. Add to `loadConfig()` function
 3. Add to `hasMediaServices()` check
@@ -170,6 +175,7 @@ config = Config{
 - **Structs**: `PascalCase` (`Config`, `MediaContainer`)
 
 ### Error Handling
+
 ```go
 // DO: Silent failure for optional features
 output, err := exec.Command("optional-tool").Output()
@@ -190,6 +196,7 @@ if err != nil {
 ```
 
 ### HTTP Requests
+
 ```go
 // DO: Use global httpClient with timeout
 resp, err := httpClient.Get(url)
@@ -207,6 +214,7 @@ client := &http.Client{} // ❌ Wastes resources
 ```
 
 ### Output Formatting
+
 ```go
 // DO: Use dotLabel for consistency
 dotLabel("Metric Name")
@@ -226,6 +234,7 @@ fmt.Print(str)        // ✓ Better
 ## Testing Guidelines
 
 ### Manual Testing
+
 ```bash
 # Test with no configuration (should degrade gracefully)
 ./motd
@@ -242,6 +251,7 @@ PLEX_TOKEN=test ./motd
 ```
 
 ### Performance Testing
+
 ```bash
 # Benchmark startup time
 time ./motd > /dev/null
@@ -251,6 +261,7 @@ time ./motd > /dev/null
 ```
 
 ### Build Testing
+
 ```bash
 # Ensure code compiles
 go build -o motd main.go
