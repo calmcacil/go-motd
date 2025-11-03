@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/thewildhive/go-motd/compare/v0.3.0...v0.3.1) (2025-11-03)
+
+
+### Bug Fixes
+
+* resolve workflow branch protection conflicts ([56fbc3f](https://github.com/thewildhive/go-motd/commit/56fbc3f4ff1c627f9e57c7ae0ae5e83435f01f0d))
+
 ## [0.3.0](https://github.com/calmcacil/go-motd/compare/v0.2.0...v0.3.0) (2025-11-03)
 
 
