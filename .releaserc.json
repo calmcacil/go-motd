@@ -19,6 +19,7 @@
     ]
   ],
   "preset": "conventionalcommits",
+  "tagFormat": "v${version}",
   "releaseRules": [
     {"type": "feat", "release": "minor"},
     {"type": "fix", "release": "patch"},
