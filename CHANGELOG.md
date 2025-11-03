@@ -1,3 +1,10 @@
+## [0.5.2](https://github.com/calmcacil/go-motd/compare/v0.5.1...v0.5.2) (2025-11-03)
+
+
+### Bug Fixes
+
+* remove ci/chore from release rules to prevent unwanted releases ([c54a9a3](https://github.com/calmcacil/go-motd/commit/c54a9a305db534071388d3ac001b87b5859bbe2d))
+
 ## [0.5.1](https://github.com/calmcacil/go-motd/compare/v0.5.0...v0.5.1) (2025-11-03)
 
 ## [0.5.0](https://github.com/calmcacil/go-motd/compare/v0.4.2...v0.5.0) (2025-11-03)
