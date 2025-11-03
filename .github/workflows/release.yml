@@ -94,11 +94,11 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
           # Get next version from semantic-release dry-run
-          NEXT_VERSION=$(npx semantic-release --dry-run --no-ci 2>&1 | grep -oP 'The next release version is \K[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+          NEXT_VERSION=$(npx semantic-release --dry-run --no-ci 2>&1 | grep -oE 'The next release version is [0-9]+\.[0-9]+\.[0-9]+' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
           
           # If no version detected, fallback to patch increment
           if [ -z "$NEXT_VERSION" ]; then
-            CURRENT_VERSION=$(grep 'VERSION.*=' main.go | grep -oP '"\K[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+            CURRENT_VERSION=$(grep 'VERSION.*=' main.go | grep -oE '"[0-9]+\.[0-9]+\.[0-9]+"' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
             if [ -z "$CURRENT_VERSION" ]; then
               CURRENT_VERSION="0.1.0"
             fi
@@ -117,7 +117,7 @@ jobs:
             if [ -f "package-lock.json" ] && ! git diff --quiet package-lock.json; then
               git add package-lock.json
             fi
-            git commit -m "chore: bump version to $NEXT_VERSION [skip ci]"
+            git commit -m "ci: version bump to $NEXT_VERSION"
             git push
           else
             echo "No changes to commit"
