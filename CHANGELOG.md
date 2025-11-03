@@ -1,3 +1,16 @@
+## [0.2.0](https://github.com/calmcacil/go-motd/compare/v0.1.0...v0.2.0) (2025-11-03)
+
+
+### Features
+
+* add automatic version updating in release workflow ([c08fd68](https://github.com/calmcacil/go-motd/commit/c08fd68a27849a9f3516ba92f54d704a0724d3f0))
+
+
+### Bug Fixes
+
+* reset semantic-release to start from v0.1.0 ([c19662c](https://github.com/calmcacil/go-motd/commit/c19662cfd41e920e151b394c7962a7d1582d84ce))
+* resolve version update workflow issues ([9f157a2](https://github.com/calmcacil/go-motd/commit/9f157a2f25c9a84605460f4746258ffb4029ec3f))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
