@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/calmcacil/go-motd/compare/v1.0.2...v1.0.3) (2025-11-03)
+
+
+### Bug Fixes
+
+* ensure release assets are uploaded to correct release ([d3f6ad4](https://github.com/calmcacil/go-motd/commit/d3f6ad4ce5cbe6fe6cac6af7b7583ac3a80dbf87))
+
 ## [1.0.2](https://github.com/calmcacil/go-motd/compare/v1.0.1...v1.0.2) (2025-11-03)
 
 
