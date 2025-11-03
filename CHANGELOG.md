@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/calmcacil/go-motd/compare/v1.0.3...v1.0.4) (2025-11-03)
+
+
+### Bug Fixes
+
+* reset semantic-release to start from v0.1.0 ([c19662c](https://github.com/calmcacil/go-motd/commit/c19662cfd41e920e151b394c7962a7d1582d84ce))
+
 ## [1.0.3](https://github.com/calmcacil/go-motd/compare/v1.0.2...v1.0.3) (2025-11-03)
 
 
