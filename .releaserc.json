@@ -13,24 +13,21 @@
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md"],
-        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "assets": ["CHANGELOG.md", "main.go"],
+        "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
       }
     ]
   ],
   "preset": "conventionalcommits",
   "tagFormat": "v${version}",
-  "firstRelease": true,
   "releaseRules": [
     {"type": "feat", "release": "minor"},
     {"type": "fix", "release": "patch"},
-    {"type": "chore", "release": "patch"},
+    {"type": "perf", "release": "minor"},
+    {"type": "refactor", "release": "patch"},
     {"type": "docs", "release": "patch"},
     {"type": "style", "release": "patch"},
-    {"type": "refactor", "release": "patch"},
-    {"type": "perf", "release": "minor"},
     {"type": "test", "release": "patch"},
-    {"type": "build", "release": "patch"},
-    {"type": "ci", "release": "patch"}
+    {"type": "build", "release": "patch"}
   ]
 }
