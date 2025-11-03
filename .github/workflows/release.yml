@@ -90,7 +90,7 @@ jobs:
           
           # If no version detected, fallback to patch increment
           if [ -z "$NEXT_VERSION" ]; then
-            CURRENT_VERSION=$(grep 'VERSION = ' main.go | grep -oP '"\K[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+            CURRENT_VERSION=$(grep 'VERSION.*=' main.go | grep -oP '"\K[0-9]+\.[0-9]+\.[0-9]+' | head -1)
             if [ -z "$CURRENT_VERSION" ]; then
               CURRENT_VERSION="0.1.0"
             fi
@@ -100,12 +100,20 @@ jobs:
           echo "Next version: $NEXT_VERSION"
           
           # Update VERSION constant in main.go
-          sed -i "s/VERSION = \".*\"/VERSION = \"$NEXT_VERSION\"/" main.go
+          sed -i "s/VERSION.*= \".*\"/VERSION         = \"$NEXT_VERSION\"/" main.go
           
-          # Commit version change
-          git add main.go package-lock.json
-          git commit -m "chore: bump version to $NEXT_VERSION [skip ci]"
-          git push
+          # Check if there are changes to commit
+          if ! git diff --quiet main.go; then
+            git add main.go
+            # Only add package-lock.json if it exists and has changes
+            if [ -f "package-lock.json" ] && ! git diff --quiet package-lock.json; then
+              git add package-lock.json
+            fi
+            git commit -m "chore: bump version to $NEXT_VERSION [skip ci]"
+            git push
+          else
+            echo "No changes to commit"
+          fi
 
       - name: Run semantic-release
         env:
