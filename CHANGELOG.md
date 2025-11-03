@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/calmcacil/go-motd/compare/v0.4.0...v0.4.1) (2025-11-03)
+
+
+### Bug Fixes
+
+* update install script to use correct repository ([3cac866](https://github.com/calmcacil/go-motd/commit/3cac866bc363f3188fc55e1a86ea67a17fadbabb))
+
 ## [0.4.0](https://github.com/calmcacil/go-motd/compare/v0.3.0...v0.4.0) (2025-11-03)
 
 
