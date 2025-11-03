@@ -1,3 +1,10 @@
+## [0.3.0](https://github.com/calmcacil/go-motd/compare/v0.2.2...v0.3.0) (2025-11-03)
+
+
+### Features
+
+* add self-update functionality ([06c0479](https://github.com/calmcacil/go-motd/commit/06c04791683a390fd1051bdcd4ce954f3c15acef))
+
 ## [0.2.2](https://github.com/calmcacil/go-motd/compare/v0.2.1...v0.2.2) (2025-11-03)
 
 
