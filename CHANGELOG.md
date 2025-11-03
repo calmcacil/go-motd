@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/calmcacil/go-motd/compare/v0.2.0...v0.2.1) (2025-11-03)
+
+
+### Bug Fixes
+
+* remove manual Go module caching to eliminate tar conflicts ([5c19ca8](https://github.com/calmcacil/go-motd/commit/5c19ca81ce491a9208cbd1e9b9e12aeaa4cbef7f))
+
 ## [0.2.0](https://github.com/calmcacil/go-motd/compare/v0.1.0...v0.2.0) (2025-11-03)
 
 
