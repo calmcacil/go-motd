@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/calmcacil/go-motd/compare/v1.0.0...v1.0.1) (2025-11-03)
+
+
+### Bug Fixes
+
+* improve workflow reliability and add caching ([bb4fe74](https://github.com/calmcacil/go-motd/commit/bb4fe748b3ece0d06b9490ef996595abdc6c0825))
+
 ## 1.0.0 (2025-11-03)
 
 
