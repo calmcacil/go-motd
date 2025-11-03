@@ -105,6 +105,7 @@ jobs:
       - name: Get version
         id: version
         run: |
+          # Get the latest tag that was just created by semantic-release
           VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.1.0")
           echo "version=${VERSION#v}" >> $GITHUB_OUTPUT
           echo "tag=${VERSION}" >> $GITHUB_OUTPUT
@@ -148,5 +149,6 @@ jobs:
             release/checksums.txt
           draft: false
           prerelease: false
+          overwrite: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
