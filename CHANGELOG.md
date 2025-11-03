@@ -1,3 +1,16 @@
+## [0.3.0](https://github.com/calmcacil/go-motd/compare/v0.2.0...v0.3.0) (2025-11-03)
+
+
+### Features
+
+* add workflow_dispatch trigger for manual releases ([188f8fc](https://github.com/calmcacil/go-motd/commit/188f8fccf7bae0147b5de92df7fc440b99037c76))
+
+
+### Bug Fixes
+
+* update repository references from calmcacil to thewildhive ([947cbc8](https://github.com/calmcacil/go-motd/commit/947cbc8f1001dc615a13cc83196cb2f3f024f930))
+* update repository references from calmcacil to thewildhive ([0ffac1b](https://github.com/calmcacil/go-motd/commit/0ffac1b140b5dfca4abe3a60383e2e6d2faa437d))
+
 ## [0.3.0](https://github.com/thewildhive/go-motd/compare/v0.2.0...v0.3.0) (2025-11-03)
 
 
