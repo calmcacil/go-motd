@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/calmcacil/go-motd/compare/v1.0.1...v1.0.2) (2025-11-03)
+
+
+### Bug Fixes
+
+* resolve GitHub permissions issue for semantic-release ([6030492](https://github.com/calmcacil/go-motd/commit/6030492bd3837fad5c8ee7d1251560e8f7c298bb))
+
 ## [1.0.1](https://github.com/calmcacil/go-motd/compare/v1.0.0...v1.0.1) (2025-11-03)
 
 
